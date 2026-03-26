@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UIElements;
 
 public class TileSpawnerScript : MonoBehaviour
@@ -16,6 +17,11 @@ public class TileSpawnerScript : MonoBehaviour
 
     public Vector2 addToPositionX = new Vector2(2, 0);
     public Vector2 addToPositionY = new Vector2(0, -2);
+
+    public UnityEvent onRoundStart;
+
+    public UIBitsScript uiscript;
+
     void Start()
     {
         spawnTiles();
@@ -67,6 +73,7 @@ public class TileSpawnerScript : MonoBehaviour
     {
         for (int i = 0; i < length; i++)
         {
+
             Destroy(tiles[0]);
             tiles.Remove(tiles[0]);
 
@@ -80,6 +87,8 @@ public class TileSpawnerScript : MonoBehaviour
 
     IEnumerator animateTilesRoundOver(int length)
     {
+        Debug.Log("round over");
+
         for (int i = 0; i < length; i++)
         {
             if (tiles[i].GetComponent<TileScript>().color != UIScript.targetColorValue)//if the color of the tile does not match the target color...
@@ -89,7 +98,8 @@ public class TileSpawnerScript : MonoBehaviour
             }
             yield return new WaitForSeconds(0.02f);
         }
-
-            
+        yield return new WaitForSeconds(1);
+        uiscript.timerPaused = false;
+        onRoundStart.Invoke();
     }
 }

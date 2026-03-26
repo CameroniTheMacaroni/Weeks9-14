@@ -13,7 +13,7 @@ public class UIBitsScript : MonoBehaviour
     public TextMeshProUGUI timerTxt;
     public TextMeshProUGUI scoreTxt;
 
-    public float timer;
+    public float timer = 3f;
     public int score;
 
     public float roundedTimer;
@@ -22,7 +22,9 @@ public class UIBitsScript : MonoBehaviour
     public int targetColorValue;
     public Image targetColor;
 
-    public UnityEvent onRoundStart;
+    public bool timerPaused;
+
+    public TileSpawnerScript tilespawnerscript;
     void Start()
     {
        changeTargetColor();
@@ -38,9 +40,10 @@ public class UIBitsScript : MonoBehaviour
         if (timer <= 0)//if timer is done, reset
         {
             timer = initialTimer;
-            onRoundStart.Invoke();
+            timerPaused = true;
+            tilespawnerscript.tilesRoundOver();
         }
-        else
+        else if (timerPaused == false) 
         {
             timer -= Time.deltaTime;//tick tock
         }
