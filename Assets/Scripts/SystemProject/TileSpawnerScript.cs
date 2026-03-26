@@ -15,7 +15,7 @@ public class TileSpawnerScript : MonoBehaviour
     public Vector2 addToPositionY = new Vector2(0, -2);
     void Start()
     {
-        
+        spawnTiles();
     }
 
     
@@ -33,10 +33,10 @@ public class TileSpawnerScript : MonoBehaviour
     }
     IEnumerator animateTilesSpawn()
     {
-        transform.position = new Vector3(-9, 4, 0);//start at the top left
+        transform.position = new Vector3(-9, 6, 0);//start at the top left
         for (int i = 0; i <= 9; i++)//go row by row (vertical)
         {
-            for (int j = 0; j <= 4; j++)//go column by column (horizontal)
+            for (int j = 0; j <= 5; j++)//go column by column (horizontal)
             {
                 randomNumber = Random.Range(1, 7);//select a random number between 1-6
                 spawnedTile = Instantiate(tile, transform.position, transform.rotation);//spawn a tile at the current position
@@ -46,11 +46,11 @@ public class TileSpawnerScript : MonoBehaviour
                 tiles.Add(spawnedTile);//adding the spawned tile to the arraylist
 
                 transform.position += (Vector3)addToPositionY;//move down
-                yield return new WaitForSeconds(0.05f);
+                yield return new WaitForSeconds(0.02f);
             }
             transform.position = new Vector3(transform.position.x, 4, 0);//go back to the top
             transform.position += (Vector3)addToPositionX;//move right
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForSeconds(0.02f);
 
         }
     }
@@ -60,7 +60,12 @@ public class TileSpawnerScript : MonoBehaviour
         {
             Destroy(tiles[0]);
             tiles.Remove(tiles[0]);
-            yield return new WaitForSeconds(0.05f);
+
+            if (i == 10)
+            {
+                StartCoroutine(animateTilesSpawn());
+            }
+            yield return new WaitForSeconds(0.02f);
         }
     }
 }

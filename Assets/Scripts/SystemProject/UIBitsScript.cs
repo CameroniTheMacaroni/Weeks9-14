@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using TMPro;
 //using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
-public class TurnLogicScript : MonoBehaviour
+public class UIBitsScript : MonoBehaviour
 {
     public TextMeshProUGUI timerTxt;
     public TextMeshProUGUI scoreTxt;
@@ -20,6 +21,8 @@ public class TurnLogicScript : MonoBehaviour
 
     public int color;
     public Image targetColor;
+
+    public UnityEvent onRoundStart;
     void Start()
     {
        
@@ -35,6 +38,7 @@ public class TurnLogicScript : MonoBehaviour
         if (timer <= 0)//if timer is done, reset
         {
             timer = initialTimer;
+            onRoundStart.Invoke();
         }
         else
         {
