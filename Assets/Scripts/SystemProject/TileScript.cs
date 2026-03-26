@@ -41,6 +41,9 @@ public class TileScript : MonoBehaviour
             case 6:
                 sprtRen.color = Color.purple;
                 break;
+            case 7:
+                sprtRen.color = Color.darkRed; 
+                break;
         }
     }
 }

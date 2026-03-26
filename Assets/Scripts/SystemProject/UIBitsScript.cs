@@ -19,13 +19,13 @@ public class UIBitsScript : MonoBehaviour
     public float roundedTimer;
     public float initialTimer = 5f;
 
-    public int color;
+    public int targetColorValue;
     public Image targetColor;
 
     public UnityEvent onRoundStart;
     void Start()
     {
-       
+       changeTargetColor();
     }
 
     
@@ -47,9 +47,9 @@ public class UIBitsScript : MonoBehaviour
     }
     public void changeTargetColor()
     {
-        color = Random.Range(1, 7);
+        targetColorValue = Random.Range(1, 7);
 
-        switch (color)
+        switch (targetColorValue)
         {
             case 1:
                 targetColor.color = Color.red;

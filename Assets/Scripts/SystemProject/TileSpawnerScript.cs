@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class TileSpawnerScript : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class TileSpawnerScript : MonoBehaviour
     public GameObject spawnedTile;
     public List<GameObject> tiles;
     public TileScript spawnedScript;
+
+    public UIBitsScript UIScript;
 
     public int randomNumber;
 
@@ -31,6 +34,12 @@ public class TileSpawnerScript : MonoBehaviour
     {
         StartCoroutine(animateTilesClear(tiles.Count));
     }
+    public void tilesRoundOver()
+    {
+        StartCoroutine(animateTilesRoundOver(tiles.Count));
+    }
+
+
     IEnumerator animateTilesSpawn()
     {
         transform.position = new Vector3(-9, 6, 0);//start at the top left
@@ -67,5 +76,20 @@ public class TileSpawnerScript : MonoBehaviour
             }
             yield return new WaitForSeconds(0.02f);
         }
+    }
+
+    IEnumerator animateTilesRoundOver(int length)
+    {
+        for (int i = 0; i < length; i++)
+        {
+            if (tiles[i].GetComponent<TileScript>().color != UIScript.targetColorValue)//if the color of the tile does not match the target color...
+            {
+                tiles[i].GetComponent<TileScript>().color = 7;//change the color to dark red
+                tiles[i].GetComponent<TileScript>().changeColor();//and update to reflect the color change
+            }
+            yield return new WaitForSeconds(0.02f);
+        }
+
+            
     }
 }
