@@ -1,7 +1,5 @@
-using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class TileSpawnerScript : MonoBehaviour
@@ -45,7 +43,7 @@ public class TileSpawnerScript : MonoBehaviour
                 spawnedTile.GetComponent<TileScript>().color = randomNumber;//set the color to something random
                 spawnedTile.GetComponent<TileScript>().changeColor();//update the tiles to reflect that color
 
-                tiles.Add(spawnedTile);
+                tiles.Add(spawnedTile);//adding the spawned tile to the arraylist
 
                 transform.position += (Vector3)addToPositionY;//move down
                 yield return new WaitForSeconds(0.05f);
