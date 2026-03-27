@@ -14,7 +14,7 @@ public class UIBitsScript : MonoBehaviour
     public TextMeshProUGUI scoreTxt;
 
     public float timer = 3f;
-    public int score;
+    public int score = -1;
 
     public float roundedTimer;
     public float initialTimer = 5f;
@@ -51,6 +51,7 @@ public class UIBitsScript : MonoBehaviour
     public void changeTargetColor()
     {
         targetColorValue = Random.Range(1, 7);
+        score++;
 
         switch (targetColorValue)
         {

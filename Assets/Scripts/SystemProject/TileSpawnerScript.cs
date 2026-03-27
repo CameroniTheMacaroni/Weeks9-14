@@ -87,7 +87,6 @@ public class TileSpawnerScript : MonoBehaviour
 
     IEnumerator animateTilesRoundOver(int length)
     {
-        Debug.Log("round over");
 
         for (int i = 0; i < length; i++)
         {
