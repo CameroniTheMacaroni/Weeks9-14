@@ -308,6 +308,7 @@ MonoBehaviour:
   deathScreen: {fileID: 2141552690}
   UIScript: {fileID: 2057918481}
   randomNumber: 0
+  spawnSpeed: 0.02
   addToPositionX: {x: 2, y: 0}
   addToPositionY: {x: 0, y: -2}
   onRoundStart:
@@ -1811,9 +1812,9 @@ RectTransform:
   - {fileID: 1232339006}
   - {fileID: 275576528}
   - {fileID: 790922590}
-  - {fileID: 88422637}
   - {fileID: 1065037200}
   - {fileID: 2141552693}
+  - {fileID: 88422637}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2852,7 +2853,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2141552691
 MonoBehaviour:
   m_ObjectHideFlags: 0
