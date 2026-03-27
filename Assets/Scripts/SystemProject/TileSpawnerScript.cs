@@ -16,6 +16,7 @@ public class TileSpawnerScript : MonoBehaviour
     public UIBitsScript UIScript;
 
     public int randomNumber;
+    public float spawnSpeed = 0.02f;
 
     public Vector2 addToPositionX = new Vector2(2, 0);
     public Vector2 addToPositionY = new Vector2(0, -2);
@@ -55,6 +56,9 @@ public class TileSpawnerScript : MonoBehaviour
         uiscript.score = 0;//reset score
         uiscript.timerPaused = false;//unpause timer
         playerhitboxscript.isDead = false;//revive player
+        spawnSpeed = 0.02f; //reset difficulty
+        uiscript.initialTimer = 3;
+        uiscript.timer = uiscript.initialTimer;//reset the timer
     }
 
 
@@ -73,12 +77,11 @@ public class TileSpawnerScript : MonoBehaviour
                 tiles.Add(spawnedTile);//adding the spawned tile to the arraylist
 
                 transform.position += (Vector3)addToPositionY;//move down
-                yield return new WaitForSeconds(0.02f);
+                yield return new WaitForSeconds(spawnSpeed);
             }
             transform.position = new Vector3(transform.position.x, 4, 0);//go back to the top
             transform.position += (Vector3)addToPositionX;//move right
-            yield return new WaitForSeconds(0.02f);
-
+            yield return new WaitForSeconds(spawnSpeed);
         }
     }
     IEnumerator animateTilesClear(int length)
@@ -93,13 +96,12 @@ public class TileSpawnerScript : MonoBehaviour
             {
                 StartCoroutine(animateTilesSpawn());
             }
-            yield return new WaitForSeconds(0.02f);
+            yield return new WaitForSeconds(spawnSpeed);
         }
     }
 
     IEnumerator animateTilesRoundOver(int length)
     {
-
         for (int i = 0; i < length; i++)
         {
             if (tiles[i].GetComponent<TileScript>().color != UIScript.targetColorValue)//if the color of the tile does not match the target color...
@@ -107,13 +109,14 @@ public class TileSpawnerScript : MonoBehaviour
                 tiles[i].GetComponent<TileScript>().color = 7;//change the color to dark red
                 tiles[i].GetComponent<TileScript>().changeColor();//and update to reflect the color change
             }
-            yield return new WaitForSeconds(0.02f);
+            yield return new WaitForSeconds(spawnSpeed);
         }
         if (playerhitboxscript.isDead == false)//if the player is still alive...
         {
             yield return new WaitForSeconds(1);
-            onRoundStart.Invoke();//start a new round...
+            onRoundStart.Invoke();//start a new round
             uiscript.timerPaused = false;//and unpause the timer
+            spawnSpeed -= 0.001f;
         }
         else//if the player is dead
         {

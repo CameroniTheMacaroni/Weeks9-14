@@ -17,7 +17,7 @@ public class UIBitsScript : MonoBehaviour
     public int score = -1;
 
     public float roundedTimer;
-    public float initialTimer = 5f;
+    public float initialTimer = 3f;
 
     public int targetColorValue;
     public Image targetColor;
@@ -52,6 +52,7 @@ public class UIBitsScript : MonoBehaviour
     {
         targetColorValue = Random.Range(1, 7);
         score++;//every time the target color changes, add one to the score (thats why the score starts at -1)
+        initialTimer = (initialTimer / 10) * 9;//the timer gets a little faster every round
 
         switch (targetColorValue)
         {
