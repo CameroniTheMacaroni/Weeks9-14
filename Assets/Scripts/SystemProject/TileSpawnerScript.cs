@@ -11,6 +11,8 @@ public class TileSpawnerScript : MonoBehaviour
     public List<GameObject> tiles;
     public TileScript spawnedScript;
 
+    public GameObject deathScreen;
+
     public UIBitsScript UIScript;
 
     public int randomNumber;
@@ -21,6 +23,7 @@ public class TileSpawnerScript : MonoBehaviour
     public UnityEvent onRoundStart;
 
     public UIBitsScript uiscript;
+    public PlayerHitboxScript playerhitboxscript;
 
     void Start()
     {
@@ -97,8 +100,16 @@ public class TileSpawnerScript : MonoBehaviour
             }
             yield return new WaitForSeconds(0.02f);
         }
-        yield return new WaitForSeconds(1);
-        uiscript.timerPaused = false;
-        onRoundStart.Invoke();
+        if (playerhitboxscript.isDead == false)//if the player is still alive...
+        {
+            yield return new WaitForSeconds(1);
+            onRoundStart.Invoke();//start a new round...
+            uiscript.timerPaused = false;//and unpause the timer
+        }
+        else//if the player is dead
+        {
+            yield return new WaitForSeconds(0.8f);
+            deathScreen.SetActive(true);//show the death screen
+        }
     }
 }

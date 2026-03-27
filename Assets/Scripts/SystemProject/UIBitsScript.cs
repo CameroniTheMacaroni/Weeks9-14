@@ -51,7 +51,7 @@ public class UIBitsScript : MonoBehaviour
     public void changeTargetColor()
     {
         targetColorValue = Random.Range(1, 7);
-        score++;
+        score++;//every time the target color changes, add one to the score (thats why the score starts at -1)
 
         switch (targetColorValue)
         {
