@@ -28,6 +28,7 @@ public class TileSpawnerScript : MonoBehaviour
     void Start()
     {
         spawnTiles();
+        deathScreen.SetActive(false);
     }
 
     
@@ -46,6 +47,14 @@ public class TileSpawnerScript : MonoBehaviour
     public void tilesRoundOver()
     {
         StartCoroutine(animateTilesRoundOver(tiles.Count));
+    }
+    public void restartGameAfterDeath()
+    {
+        onRoundStart.Invoke();//start new round
+        deathScreen.SetActive(false);//turn off the death screen
+        uiscript.score = 0;//reset score
+        uiscript.timerPaused = false;//unpause timer
+        playerhitboxscript.isDead = false;//revive player
     }
 
 
