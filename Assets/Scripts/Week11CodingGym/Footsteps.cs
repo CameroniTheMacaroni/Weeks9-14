@@ -15,6 +15,8 @@ public class Footsteps : MonoBehaviour
 
     public ParticleSystem particle;
     public int random;
+
+    public CameraShake cameraShakeScript;
     void Start()
     {
         
@@ -30,6 +32,7 @@ public class Footsteps : MonoBehaviour
     {
         random = Random.Range(1, 10);
         particle.Emit(1000);
+        cameraShakeScript.shakeCamera();
         switch (random)
         {
             case 1:
