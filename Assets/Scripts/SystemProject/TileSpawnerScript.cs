@@ -65,9 +65,9 @@ public class TileSpawnerScript : MonoBehaviour
     IEnumerator animateTilesSpawn()
     {
         transform.position = new Vector3(-9, 6, 0);//start at the top left
-        for (int i = 0; i <= 9; i++)//go row by row (vertical)
+        for (int i = 0; i <= 9; i++)//go column by column (vertical)
         {
-            for (int j = 0; j <= 5; j++)//go column by column (horizontal)
+            for (int j = 0; j <= 5; j++)//go row by row (horizontal)
             {
                 randomNumber = Random.Range(1, 7);//select a random number between 1-6
                 spawnedTile = Instantiate(tile, transform.position, transform.rotation);//spawn a tile at the current position
@@ -106,7 +106,7 @@ public class TileSpawnerScript : MonoBehaviour
         {
             if (tiles[i].GetComponent<TileScript>().color != UIScript.targetColorValue)//if the color of the tile does not match the target color...
             {
-                tiles[i].GetComponent<TileScript>().color = 7;//change the color to dark red
+                tiles[i].GetComponent<TileScript>().color = 7;//change the color to dark red...
                 tiles[i].GetComponent<TileScript>().changeColor();//and update to reflect the color change
             }
             yield return new WaitForSeconds(spawnSpeed);
@@ -114,11 +114,11 @@ public class TileSpawnerScript : MonoBehaviour
         if (playerhitboxscript.isDead == false)//if the player is still alive...
         {
             yield return new WaitForSeconds(1);
-            onRoundStart.Invoke();//start a new round
+            onRoundStart.Invoke();//start a new round...
             uiscript.timerPaused = false;//and unpause the timer
             spawnSpeed -= 0.001f;
         }
-        else//if the player is dead
+        else//if the player is dead...
         {
             yield return new WaitForSeconds(0.8f);
             deathScreen.SetActive(true);//show the death screen
